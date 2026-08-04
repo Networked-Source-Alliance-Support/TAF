@@ -80,3 +80,82 @@ This changes Terminal Academy from a collection of scripts into a self-generatin
 ./scripts/build/build-all.sh
 
 That is the same pattern used by larger developer platforms: a reproducible build layer that constructs the environment from source.
+
+
+
+
+
+
+
+
+---
+
+## build all
+
+---
+
+
+Run after build
+
+Your full pipeline becomes:
+
+./scripts/build/build-all.sh
+
+./scripts/audit/analyze-build.sh
+
+Output:
+
+===============================================
+ BUILD ANALYSIS COMPLETE
+===============================================
+
+Status: PASS
+
+PASS: 42
+FAIL: 0
+WARN: 0
+
+Report:
+reports/build-analysis.txt
+
+JSON:
+reports/build-analysis.json
+
+Generated artifact:
+
+reports/
+
+├── build-analysis.txt
+└── build-analysis.json
+
+Example JSON:
+
+{
+  "framework": "Terminal Academy Framework",
+  "analysis_date": "2026-08-04T18:00:00",
+
+  "results": {
+    "status": "PASS",
+    "passed": 42,
+    "failed": 0,
+    "warnings": 0
+  }
+}
+
+This gives Terminal Academy a complete lifecycle:
+
+SOURCE
+  |
+  v
+BUILD ALL
+  |
+  v
+GENERATE FRAMEWORK
+  |
+  v
+AUDIT ENGINE
+  |
+  v
+VERIFIED RELEASE
+
+The next evolution would be adding a RAIP release artifact generator so every successful build produces a signed, hash-verified framework release manifest.
